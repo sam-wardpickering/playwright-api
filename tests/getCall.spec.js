@@ -8,6 +8,13 @@ test('Test GET API', async ({ request }) => {
 
     const resStatus = response.status();
 
-    console.log(responseJson);
-    console.log(resStatus);
+    const resStatusTxt = response.statusText();
+    const resHeaders = response.headers();
+    const resHeadersArray = response.headersArray();
+
+    // console.log(responseJson);
+    // console.log(resStatus);
+    // console.log(resStatusTxt);
+    console.log(resHeaders);
+    console.log(resHeadersArray);
 });
