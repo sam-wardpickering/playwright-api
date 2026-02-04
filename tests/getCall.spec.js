@@ -5,9 +5,7 @@ test('Test GET API', async ({ request }) => {
     const response = await request.get("https://jsonplaceholder.typicode.com/posts/1");
 
     const responseJson = await response.json();
-
     const resStatus = response.status();
-
     const resStatusTxt = response.statusText();
     const resHeaders = response.headers();
     const resHeadersArray = response.headersArray();
@@ -15,6 +13,9 @@ test('Test GET API', async ({ request }) => {
     // console.log(responseJson);
     // console.log(resStatus);
     // console.log(resStatusTxt);
-    console.log(resHeaders);
-    console.log(resHeadersArray);
+    // console.log(resHeaders);
+    // console.log(resHeadersArray);
+
+    expect(resStatus).toBe(200);
+    expect(resStatusTxt).toContain("OK");
 });
