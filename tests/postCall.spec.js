@@ -49,6 +49,9 @@ test.only('Post call example with BookingID', async ({ request }) => {
     expect(responseData.bookingid).not.toBeNull(); 
 
     expect(responseData.booking.firstname).toBe(bookingData.firstname);
+    expect(responseData.booking.lastname).toBe(bookingData.lastname);
+    expect(responseData).toHaveProperty("totalprice", 999);
+    expect(responseData).toHaveProperty("depositpaid", true);
     
     
 });
