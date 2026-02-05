@@ -24,14 +24,14 @@ test('Post call example with token', async ({ request }) => {
 test.only('Post call example with BookingID', async ({ request }) => {
     const bookingData = {
         "firstname": "Jim",
-        "lastname": "Brown",
-        "totalprice": 111,
+        "lastname": "Morrison",
+        "totalprice": 999,
         "depositpaid": true,
         "bookingdates": {
-            "checkin": "2013-02-23",
-            "checkout": "2014-10-23"
+            "checkin": "2026-02-23",
+            "checkout": "2029-10-23"
         },
-        "additionalneeds": "Breakfast"
+        "additionalneeds": "Dinner"
     }
 
     const response = await request.post('https://restful-booker.herokuapp.com/booking', {
