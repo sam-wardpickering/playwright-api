@@ -17,5 +17,6 @@ test('Test GET API', async ({ request }) => {
     // console.log(resHeadersArray);
 
     expect(resStatus).toBe(200);
+    expect(resStatus).not.toBe(201);
     expect(resStatusTxt).toContain("OK");
 });
