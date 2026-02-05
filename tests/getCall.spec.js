@@ -19,4 +19,8 @@ test('Test GET API', async ({ request }) => {
     expect(resStatus).toBe(200);
     expect(resStatus).not.toBe(201);
     expect(resStatusTxt).toContain("OK");
+
+    expect(response.ok()).toBeTruthy();
+
+    expect(responseJson).toHaveProperty("userId", 1);
 });
