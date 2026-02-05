@@ -45,7 +45,10 @@ test.only('Post call example with BookingID', async ({ request }) => {
     
     const responseData = await response.json();
     
-    console.log(responseData);
+    console.log(responseData.bookingid);
+    expect(responseData.bookingid).not.toBeNull(); 
+
+    expect(responseData.booking.firstname).toBe(bookingData.firstname);
     
     
 });
