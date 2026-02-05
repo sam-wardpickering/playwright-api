@@ -28,5 +28,6 @@ test('Test GET API', async ({ request }) => {
     expect(responseJson).toHaveProperty("userId", 1);
     expect(responseJson).toHaveProperty("id", 1);
     expect(responseJson).toHaveProperty("title", "sunt aut facere repellat provident occaecati excepturi optio reprehenderit");
+    expect(responseJson.body).toContain("quia et suscipit");
 
 });
