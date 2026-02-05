@@ -2,7 +2,9 @@ import { test, expect } from '@playwright/test';
 
 test('Test GET API', async ({ request }) => {
 
-    const response = await request.get("https://jsonplaceholder.typicode.com/posts/1");
+    const response = await request.get(process.env.API_URL);
+
+    // console.log(process.env.API_URL);
 
     const responseJson = await response.json();
     const resStatus = response.status();
@@ -22,5 +24,9 @@ test('Test GET API', async ({ request }) => {
 
     expect(response.ok()).toBeTruthy();
 
+    // check json
     expect(responseJson).toHaveProperty("userId", 1);
+    expect(responseJson).toHaveProperty("id", 1);
+    expect(responseJson).toHaveProperty("title", "sunt aut facere repellat provident occaecati excepturi optio reprehenderit");
+
 });
