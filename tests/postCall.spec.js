@@ -15,4 +15,8 @@ test('Post call example with token and booking ID', async ({ request }) => {
 
     console.log(response.status());
     
+    const responseData = await response.json();
+    expect(responseData.token).not.toBeNull();
+    
+    
 });
