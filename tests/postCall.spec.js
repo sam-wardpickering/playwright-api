@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Post call example with token and booking ID', async ({ request }) => {
+test('Post call example with token', async ({ request }) => {
     const authData = {
         "username" : "admin",
         "password" : "password123"
@@ -16,7 +16,36 @@ test('Post call example with token and booking ID', async ({ request }) => {
     console.log(response.status());
     
     const responseData = await response.json();
-    expect(responseData.token).not.toBeNull();
+    expect(responseData.token).not.toBeNull(); 
+    
+});
+
+
+test.only('Post call example with BookingID', async ({ request }) => {
+    const bookingData = {
+        "firstname": "Jim",
+        "lastname": "Brown",
+        "totalprice": 111,
+        "depositpaid": true,
+        "bookingdates": {
+            "checkin": "2013-02-23",
+            "checkout": "2014-10-23"
+        },
+        "additionalneeds": "Breakfast"
+    }
+
+    const response = await request.post('https://restful-booker.herokuapp.com/booking', {
+        headers: {
+            "Content-Type": "application/json"
+        },
+        data: bookingData
+    })
+
+    console.log(response.status());
+    
+    const responseData = await response.json();
+    
+    console.log(responseData);
     
     
 });
