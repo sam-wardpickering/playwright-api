@@ -60,15 +60,18 @@ test('Put Example', async ({ request }) => {
         },
         "additionalneeds": "Gaming PC & breakfast"
     }
-    
+
     const updatedBooking = await request.put(`https://restful-booker.herokuapp.com/booking/${bookingID}`, {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "Cookie": token
+            "Cookie": `token=${token}`
         },
         data: updateBookingData
     });
 
+    const updatedBookingResJson = await updatedBooking.json();
+
+    console.log(updatedBookingResJson);
 
 });
