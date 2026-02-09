@@ -6,8 +6,8 @@ test('Put Example', async ({ request }) => {
     // Create token
 
     const postData = {
-        "username" : "admin",
-        "password" : "password123"
+        "username" : process.env.TOKEN_USERNAME,
+        "password" : process.env.TOKEN_PASSWORD
     };
 
     const response = await request.post("https://restful-booker.herokuapp.com/auth", {
