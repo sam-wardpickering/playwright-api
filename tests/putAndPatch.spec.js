@@ -17,7 +17,7 @@ test('Put Example', async ({ request }) => {
 
     const responseJson = await response.json();
 
-    const token = responseJson;
+    const token = responseJson.token;
     
-    console.log(token);
+    console.log("Your token is: " +token);
 });
