@@ -64,7 +64,7 @@ test('Put Example', async ({ request }) => {
             "checkin": "2026-02-10",
             "checkout": "2026-02-15"
         },
-        "additionalneeds": "Gaming PC & breakfast"
+        "additionalneeds": "Gaming PC"
     }
 
     const updatedBooking = await request.put(`https://restful-booker.herokuapp.com/booking/${bookingID}`, {
