@@ -3,6 +3,8 @@ import { test, expect } from '@playwright/test';
 
 test('Put Example', async ({ request }) => {
 
+    // Create token
+
     const postData = {
         "username" : "admin",
         "password" : "password123"
@@ -21,6 +23,8 @@ test('Put Example', async ({ request }) => {
     const token = responseJson.token;
     
     console.log("Your token is: " +token);
+
+    // Create new booking
 
     const newBookingData = {
         "firstname": "Sam",
@@ -42,6 +46,8 @@ test('Put Example', async ({ request }) => {
     });
 
     const newBookingResJson = await newBookingResponse.json();
+
+    console.log(newBookingResJson);
 
     const bookingID = newBookingResJson.bookingid;
 
