@@ -80,4 +80,8 @@ test('Put Example', async ({ request }) => {
 
     console.log(updatedBookingResJson);
 
+    // Verify firstname and lastname updated
+
+    // Verify status ok
+
 });
