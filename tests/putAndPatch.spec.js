@@ -7,11 +7,17 @@ test('Put Example', async ({ request }) => {
         "password" : "password123"
     };
 
-    await request.post("https://restful-booker.herokuapp.com/auth", {
+    const response = await request.post("https://restful-booker.herokuapp.com/auth", {
         headers: {
             "Content-Type": "application/json",
         },
         data: postData
 
     });
+
+    const responseJson = await response.json();
+
+    const token = responseJson;
+    
+    console.log(token);
 });
