@@ -46,4 +46,29 @@ test('Put Example', async ({ request }) => {
     const bookingID = newBookingResJson.bookingid;
 
     console.log("New booking ID is: " +bookingID);
+
+    // Update booking
+
+    const updateBookingData = {
+        "firstname": "Samuel",
+        "lastname": "Ward-Pickering",
+        "totalprice": 333,
+        "depositpaid": true,
+        "bookingdates": {
+            "checkin": "2026-02-10",
+            "checkout": "2026-02-15"
+        },
+        "additionalneeds": "Gaming PC & breakfast"
+    }
+    
+    const updatedBooking = await request.put(`https://restful-booker.herokuapp.com/booking/${bookingID}`, {
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Cookie": token
+        },
+        data: updateBookingData
+    });
+
+
 });
