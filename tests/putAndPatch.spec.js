@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-
-test('Put Example', async ({ request }) => {
+test('Put Request Example', async ({ request }) => {
 
     // Create token
 
@@ -18,11 +17,9 @@ test('Put Example', async ({ request }) => {
 
     });
 
-    const responseJson = await response.json();
+    expect(response.ok()).toBeTruthy();
 
-    const token = responseJson.token;
-    
-    console.log("Your token is: " +token);
+    const { token } = await response.json();
 
     // Create new booking
 
@@ -45,13 +42,11 @@ test('Put Example', async ({ request }) => {
         data: newBookingData
     });
 
+    expect(newBookingResponse.ok()).toBeTruthy();
+
     const newBookingResJson = await newBookingResponse.json();
 
-    console.log(newBookingResJson);
-
     const bookingID = newBookingResJson.bookingid;
-
-    console.log("New booking ID is: " +bookingID);
 
     // Update booking
 
@@ -76,12 +71,13 @@ test('Put Example', async ({ request }) => {
         data: updateBookingData
     });
 
+    // Verify status ok
+    expect(updatedBooking.ok()).toBeTruthy();
+
     const updatedBookingResJson = await updatedBooking.json();
 
-    console.log(updatedBookingResJson);
-
     // Verify firstname and lastname updated
-
-    // Verify status ok
+    expect(updatedBookingResJson.firstname).toBe(updateBookingData.firstname);
+    expect(updatedBookingResJson.lastname).toBe(updateBookingData.lastname);
 
 });
