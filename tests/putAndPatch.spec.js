@@ -6,18 +6,21 @@ test('Put Request Example', async ({ request }) => {
         'Content-Type': 'application/json'
     };
 
+    const bookingBaseUrl = process.env.BOOKING_API_BASE_URL;
+    expect(bookingBaseUrl).toBeTruthy();
+
     /* Create token */
 
     // Check credentials
-    expect(process.env.TOKEN_USERNAME).toBeTruthy();
-    expect(process.env.TOKEN_PASSWORD).toBeTruthy();
+    expect(process.env.BOOKING_API_TOKEN_USERNAME).toBeTruthy();
+    expect(process.env.BOOKING_API_TOKEN_PASSWORD).toBeTruthy();
 
     const postData = {
-        "username" : process.env.TOKEN_USERNAME,
-        "password" : process.env.TOKEN_PASSWORD
+        "username" : process.env.BOOKING_API_TOKEN_USERNAME,
+        "password" : process.env.BOOKING_API_TOKEN_PASSWORD
     };
 
-    const authResponse = await request.post("/auth", {
+    const authResponse = await request.post(`${bookingBaseUrl}/auth`, {
         headers: jsonHeaderContentType,
         data: postData
 
@@ -45,7 +48,7 @@ test('Put Request Example', async ({ request }) => {
         "additionalneeds": "Gaming PC"
     };
 
-    const bookingResponse = await request.post("/booking", {
+    const bookingResponse = await request.post(`${bookingBaseUrl}/booking`, {
         headers: jsonHeaderContentType,
         data: bookingData
     });
@@ -80,7 +83,7 @@ test('Put Request Example', async ({ request }) => {
         "additionalneeds": "Gaming PC"
     };
 
-    const updateResponse = await request.put(`/booking/${bookingID}`, {
+    const updateResponse = await request.put(`${bookingBaseUrl}/booking/${bookingID}`, {
         headers: {
             ...jsonHeaderContentType,
             "Accept": "application/json",
