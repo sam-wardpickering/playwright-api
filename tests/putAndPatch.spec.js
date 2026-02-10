@@ -2,6 +2,10 @@ import { test, expect } from '@playwright/test';
 
 test('Put Request Example', async ({ request }) => {
 
+    const jsonHeaderContentType = {
+        'Content-Type': 'application/json'
+    };
+
     /* Create token */
 
     // Check credentials
@@ -14,9 +18,7 @@ test('Put Request Example', async ({ request }) => {
     };
 
     const authResponse = await request.post("/auth", {
-        headers: {
-            "Content-Type": "application/json",
-        },
+        headers: jsonHeaderContentType,
         data: postData
 
     });
@@ -44,9 +46,7 @@ test('Put Request Example', async ({ request }) => {
     };
 
     const bookingResponse = await request.post("/booking", {
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: jsonHeaderContentType,
         data: bookingData
     });
 
@@ -55,10 +55,13 @@ test('Put Request Example', async ({ request }) => {
 
     const bookingJson = await bookingResponse.json();
 
+    // Check booking
+    expect(bookingJson.booking).toBeTruthy();
+
     const bookingID = bookingJson.bookingid;
 
     // Check booking ID
-    expect(bookingID).toBeTruthy();
+    expect(bookingID).toBeDefined();
 
     // Check booking ID type
     expect(typeof bookingID).toBe('number');
@@ -79,7 +82,7 @@ test('Put Request Example', async ({ request }) => {
 
     const updateResponse = await request.put(`/booking/${bookingID}`, {
         headers: {
-            "Content-Type": "application/json",
+            ...jsonHeaderContentType,
             "Accept": "application/json",
             "Cookie": `token=${token}`
         },
