@@ -2,7 +2,11 @@ import { test, expect } from '@playwright/test';
 
 test('Put Request Example', async ({ request }) => {
 
-    // Create token
+    /* Create token */
+
+    // Check credentials
+    expect(process.env.TOKEN_USERNAME).toBeTruthy();
+    expect(process.env.TOKEN_PASSWORD).toBeTruthy();
 
     const postData = {
         "username" : process.env.TOKEN_USERNAME,
@@ -17,11 +21,15 @@ test('Put Request Example', async ({ request }) => {
 
     });
 
+    // Check request was successful
     expect(response.ok()).toBeTruthy();
 
     const { token } = await response.json();
 
-    // Create new booking
+    // Check token
+    expect(token).toBeTruthy();
+
+    /* Create new booking */
 
     const newBookingData = {
         "firstname": "Sam",
@@ -42,13 +50,20 @@ test('Put Request Example', async ({ request }) => {
         data: newBookingData
     });
 
+    // Check request was successful
     expect(newBookingResponse.ok()).toBeTruthy();
 
     const newBookingResJson = await newBookingResponse.json();
 
     const bookingID = newBookingResJson.bookingid;
 
-    // Update booking
+    // Check booking ID
+    expect(bookingID).toBeTruthy();
+
+    // Check booking ID type
+    expect(typeof bookingID).toBe('number');
+
+    /* Update booking */
 
     const updateBookingData = {
         "firstname": "Samuel",
@@ -71,7 +86,7 @@ test('Put Request Example', async ({ request }) => {
         data: updateBookingData
     });
 
-    // Verify status ok
+    // Check request was successful
     expect(updatedBooking.ok()).toBeTruthy();
 
     const updatedBookingResJson = await updatedBooking.json();
