@@ -7,7 +7,10 @@ test('Put Request Example', async ({ request }) => {
     };
 
     const bookingBaseUrl = process.env.BOOKING_API_BASE_URL;
-    expect(bookingBaseUrl).toBeDefined();
+
+    // Check base url
+    expect(bookingBaseUrl).toBeTruthy();
+    expect(bookingBaseUrl).toMatch(/^https?:\/\//);
 
     /* Create token */
 
@@ -72,9 +75,7 @@ test('Put Request Example', async ({ request }) => {
 
     // Check booking ID
     expect(bookingID).toBeDefined();
-
-    // Check booking ID type
-    expect(typeof bookingID).toBe('number');
+    expect(bookingID).toBeGreaterThan(0);
 
     /* Update booking */
 
