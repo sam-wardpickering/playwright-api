@@ -13,7 +13,7 @@ test('Put Request Example', async ({ request }) => {
         "password" : process.env.TOKEN_PASSWORD
     };
 
-    const authResponse = await request.post("https://restful-booker.herokuapp.com/auth", {
+    const authResponse = await request.post("/auth", {
         headers: {
             "Content-Type": "application/json",
         },
@@ -43,7 +43,7 @@ test('Put Request Example', async ({ request }) => {
         "additionalneeds": "Gaming PC"
     };
 
-    const bookingResponse = await request.post("https://restful-booker.herokuapp.com/booking", {
+    const bookingResponse = await request.post("/booking", {
         headers: {
             "Content-Type": "application/json"
         },
@@ -77,7 +77,7 @@ test('Put Request Example', async ({ request }) => {
         "additionalneeds": "Gaming PC"
     };
 
-    const updateResponse = await request.put(`https://restful-booker.herokuapp.com/booking/${bookingID}`, {
+    const updateResponse = await request.put(`/booking/${bookingID}`, {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
