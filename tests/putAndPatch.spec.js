@@ -13,7 +13,7 @@ test('Put Request Example', async ({ request }) => {
         "password" : process.env.TOKEN_PASSWORD
     };
 
-    const response = await request.post("https://restful-booker.herokuapp.com/auth", {
+    const authResponse = await request.post("https://restful-booker.herokuapp.com/auth", {
         headers: {
             "Content-Type": "application/json",
         },
@@ -22,16 +22,16 @@ test('Put Request Example', async ({ request }) => {
     });
 
     // Check request was successful
-    expect(response.ok()).toBeTruthy();
+    expect(authResponse.ok()).toBeTruthy();
 
-    const { token } = await response.json();
+    const { token } = await authResponse.json();
 
     // Check token
     expect(token).toBeTruthy();
 
     /* Create new booking */
 
-    const newBookingData = {
+    const bookingData = {
         "firstname": "Sam",
         "lastname": "Ward",
         "totalprice": 333,
@@ -43,19 +43,19 @@ test('Put Request Example', async ({ request }) => {
         "additionalneeds": "Gaming PC"
     };
 
-    const newBookingResponse = await request.post("https://restful-booker.herokuapp.com/booking", {
+    const bookingResponse = await request.post("https://restful-booker.herokuapp.com/booking", {
         headers: {
             "Content-Type": "application/json"
         },
-        data: newBookingData
+        data: bookingData
     });
 
     // Check request was successful
-    expect(newBookingResponse.ok()).toBeTruthy();
+    expect(bookingResponse.ok()).toBeTruthy();
 
-    const newBookingResJson = await newBookingResponse.json();
+    const bookingJson = await bookingResponse.json();
 
-    const bookingID = newBookingResJson.bookingid;
+    const bookingID = bookingJson.bookingid;
 
     // Check booking ID
     expect(bookingID).toBeTruthy();
@@ -75,9 +75,9 @@ test('Put Request Example', async ({ request }) => {
             "checkout": "2026-02-15"
         },
         "additionalneeds": "Gaming PC"
-    }
+    };
 
-    const updatedBooking = await request.put(`https://restful-booker.herokuapp.com/booking/${bookingID}`, {
+    const updateResponse = await request.put(`https://restful-booker.herokuapp.com/booking/${bookingID}`, {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
@@ -87,12 +87,12 @@ test('Put Request Example', async ({ request }) => {
     });
 
     // Check request was successful
-    expect(updatedBooking.ok()).toBeTruthy();
+    expect(updateResponse.ok()).toBeTruthy();
 
-    const updatedBookingResJson = await updatedBooking.json();
+    const updateJson = await updateResponse.json();
 
     // Verify firstname and lastname updated
-    expect(updatedBookingResJson.firstname).toBe(updateBookingData.firstname);
-    expect(updatedBookingResJson.lastname).toBe(updateBookingData.lastname);
+    expect(updateJson.firstname).toBe(updateBookingData.firstname);
+    expect(updateJson.lastname).toBe(updateBookingData.lastname);
 
 });
