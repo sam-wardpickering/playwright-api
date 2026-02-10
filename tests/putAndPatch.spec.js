@@ -2,26 +2,29 @@ import { test, expect } from '@playwright/test';
 
 test('Put Request Example', async ({ request }) => {
 
-    const jsonHeaderContentType = {
+    const jsonHeaders = {
         'Content-Type': 'application/json'
     };
 
     const bookingBaseUrl = process.env.BOOKING_API_BASE_URL;
-    expect(bookingBaseUrl).toBeTruthy();
+    expect(bookingBaseUrl).toBeDefined();
 
     /* Create token */
 
     // Check credentials
-    expect(process.env.BOOKING_API_TOKEN_USERNAME).toBeTruthy();
-    expect(process.env.BOOKING_API_TOKEN_PASSWORD).toBeTruthy();
+    const username = process.env.BOOKING_API_TOKEN_USERNAME;
+    const password = process.env.BOOKING_API_TOKEN_PASSWORD;
+
+    expect(username).toBeTruthy();
+    expect(password).toBeTruthy();
 
     const postData = {
-        "username" : process.env.BOOKING_API_TOKEN_USERNAME,
-        "password" : process.env.BOOKING_API_TOKEN_PASSWORD
+        "username" : username,
+        "password" : password
     };
 
     const authResponse = await request.post(`${bookingBaseUrl}/auth`, {
-        headers: jsonHeaderContentType,
+        headers: jsonHeaders,
         data: postData
 
     });
@@ -49,7 +52,7 @@ test('Put Request Example', async ({ request }) => {
     };
 
     const bookingResponse = await request.post(`${bookingBaseUrl}/booking`, {
-        headers: jsonHeaderContentType,
+        headers: jsonHeaders,
         data: bookingData
     });
 
@@ -60,6 +63,10 @@ test('Put Request Example', async ({ request }) => {
 
     // Check booking
     expect(bookingJson.booking).toBeTruthy();
+
+    expect(bookingJson.booking.firstname).toBe(bookingData.firstname);
+    expect(bookingJson.booking.lastname).toBe(bookingData.lastname);
+    expect(bookingJson.booking.bookingdates.checkout).toBe(bookingData.bookingdates.checkout);
 
     const bookingID = bookingJson.bookingid;
 
@@ -85,7 +92,7 @@ test('Put Request Example', async ({ request }) => {
 
     const updateResponse = await request.put(`${bookingBaseUrl}/booking/${bookingID}`, {
         headers: {
-            ...jsonHeaderContentType,
+            ...jsonHeaders,
             "Accept": "application/json",
             "Cookie": `token=${token}`
         },
@@ -100,5 +107,6 @@ test('Put Request Example', async ({ request }) => {
     // Verify firstname and lastname updated
     expect(updateJson.firstname).toBe(updateBookingData.firstname);
     expect(updateJson.lastname).toBe(updateBookingData.lastname);
+    expect(updateJson.bookingdates.checkout).toBe(updateBookingData.bookingdates.checkout);
 
 });
