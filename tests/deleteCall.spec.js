@@ -77,37 +77,6 @@ test('Put Request Example', async ({ request }) => {
     expect(bookingID).toBeDefined();
     expect(bookingID).toBeGreaterThan(0);
 
-    /* Update booking */
-
-    const updateBookingData = {
-        "firstname": "Samuel",
-        "lastname": "Ward-Pickering",
-        "totalprice": 333,
-        "depositpaid": true,
-        "bookingdates": {
-            "checkin": "2026-02-10",
-            "checkout": "2026-02-15"
-        },
-        "additionalneeds": "Gaming PC"
-    };
-
-    const updateResponse = await request.put(`${bookingBaseUrl}/booking/${bookingID}`, {
-        headers: {
-            ...jsonHeaders,
-            "Accept": "application/json",
-            "Cookie": `token=${token}`
-        },
-        data: updateBookingData
-    });
-
-    // Check request was successful
-    expect(updateResponse.ok()).toBeTruthy();
-
-    const updateJson = await updateResponse.json();
-
-    // Verify firstname and lastname updated
-    expect(updateJson.firstname).toBe(updateBookingData.firstname);
-    expect(updateJson.lastname).toBe(updateBookingData.lastname);
-    expect(updateJson.bookingdates.checkout).toBe(updateBookingData.bookingdates.checkout);
+   
 
 });
