@@ -78,10 +78,13 @@ test('Put Request Example', async ({ request }) => {
     expect(bookingID).toBeGreaterThan(0);
 
     const deleteResponse = await request.delete(`${bookingBaseUrl}/booking/${bookingID}`, {
-        ...jsonHeaders,
-        "Cookie": `token=${token}`
+        headers: {
+            ...jsonHeaders,
+            "Cookie": `token=${token}`
+        }
+        
     });
 
-    expect(deleteResponse.ok()).toBeTruthy();
+    expect(deleteResponse.status()).toBe(201);
 
 });
