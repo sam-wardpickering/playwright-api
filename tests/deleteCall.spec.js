@@ -77,6 +77,8 @@ test('Put Request Example', async ({ request }) => {
     expect(bookingID).toBeDefined();
     expect(bookingID).toBeGreaterThan(0);
 
+    /* Delete booking */
+
     const deleteResponse = await request.delete(`${bookingBaseUrl}/booking/${bookingID}`, {
         headers: {
             ...jsonHeaders,
@@ -85,6 +87,10 @@ test('Put Request Example', async ({ request }) => {
         
     });
 
+    // Check request was successful
     expect(deleteResponse.ok()).toBeTruthy();
+
+    // Check status text
+    expect(deleteResponse.statusText()).toBe("Created");
 
 });
