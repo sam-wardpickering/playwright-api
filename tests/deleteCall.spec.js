@@ -93,4 +93,14 @@ test('Put Request Example', async ({ request }) => {
     // Check status text
     expect(deleteResponse.statusText()).toBe("Created");
 
+    /* Confirm booking deletion */
+
+    const checkDeleteResponse = await request.get(`${bookingBaseUrl}/booking/${bookingID}`);
+
+    // Check status code is 404 not found (booking no longer exists)
+    expect(checkDeleteResponse.status()).toBe(404);
+
+    // Check status text
+    expect(checkDeleteResponse.statusText()).toBe("Not Found");
+
 });
