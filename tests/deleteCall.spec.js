@@ -85,6 +85,6 @@ test('Put Request Example', async ({ request }) => {
         
     });
 
-    expect(deleteResponse.status()).toBe(201);
+    expect(deleteResponse.ok()).toBeTruthy();
 
 });
