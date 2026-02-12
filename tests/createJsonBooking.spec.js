@@ -7,10 +7,12 @@ test('Create New Booking With Post Call', async ({ request }) => {
 
     const bookingFile = fs.readFileSync("./testData/booking.json");
 
+    const booking = JSON.parse(bookingFile);
+
     await request.post(`${bookingBaseUrl}/booking`, {
         headers: {
             "Content-Type": "application/json"
         },
-        // data:  
+        data: booking
     });
 });
