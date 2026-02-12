@@ -1,11 +1,11 @@
 {
-    "firstname": "Sam",
-    "lastname": "Ward",
-    "totalprice": 333,
-    "depositpaid": true,
+    "firstname": "Play",
+    "lastname": "Wright",
+    "totalprice": 808,
+    "depositpaid": false,
     "bookingdates": {
         "checkin": "2026-02-10",
         "checkout": "2026-02-14"
     },
-    "additionalneeds": "Gaming PC"
+    "additionalneeds": "Mini Bar"
 }
