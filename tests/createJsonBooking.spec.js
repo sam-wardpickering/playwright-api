@@ -9,10 +9,22 @@ test('Create New Booking With Post Call', async ({ request }) => {
 
     const booking = JSON.parse(bookingFile);
 
-    await request.post(`${bookingBaseUrl}/booking`, {
+    const response = await request.post(`${bookingBaseUrl}/booking`, {
         headers: {
             "Content-Type": "application/json"
         },
         data: booking
     });
+
+    expect(response.ok()).toBeTruthy();
+
+    const responseJson = await response.json();
+
+    expect(responseJson.bookingid).toBeDefined();
+    expect(responseJson.bookingid).toBeGreaterThan(0);
+
+    // expect(responseJson.booking.firstname).toBe(booking.booking.firstname);
+    console.log(booking);
+    
+
 });
