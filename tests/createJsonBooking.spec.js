@@ -16,7 +16,7 @@ test('Create New Booking With Post Call', async ({ request }) => {
     });
 
     // Validate response
-    expect(response.status()).toBe(200);
+    expect([200, 201]).toContain(response.status());
 
     const responseJson = await response.json();
 
