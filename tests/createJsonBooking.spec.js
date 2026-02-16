@@ -11,9 +11,6 @@ test('Create New Booking With Post Call', async ({ request }) => {
     );
 
     const response = await request.post(`${bookingBaseUrl}/booking`, {
-        headers: {
-            "Content-Type": "application/json"
-        },
         data: booking
     });
 
