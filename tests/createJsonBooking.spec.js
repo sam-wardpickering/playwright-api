@@ -23,8 +23,12 @@ test('Create New Booking With Post Call', async ({ request }) => {
     expect(responseJson.bookingid).toBeDefined();
     expect(responseJson.bookingid).toBeGreaterThan(0);
 
-    // expect(responseJson.booking.firstname).toBe(booking.booking.firstname);
-    console.log(booking);
+    expect(responseJson.booking.firstname).toBe(booking.firstname);
+    expect(responseJson.booking.lastname).toBe(booking.lastname);
+    expect(responseJson.booking.depositpaid).toBe(booking.depositpaid);
+    expect(responseJson.booking.bookingdates.checkin).toBe(booking.bookingdates.checkin);
+    expect(responseJson.booking.bookingdates.checkout).toBe(booking.bookingdates.checkout);
+    // console.log(booking);
     
 
 });
