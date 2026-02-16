@@ -6,9 +6,9 @@ expect(bookingBaseUrl).toBeTruthy();
 
 test('Create New Booking With Post Call', async ({ request }) => {
 
-    const bookingFile = fs.readFileSync("./testData/booking.json");
-
-    const booking = JSON.parse(bookingFile);
+    const booking = JSON.parse(
+        fs.readFileSync('./testData/booking.json', 'utf8')
+    );
 
     const response = await request.post(`${bookingBaseUrl}/booking`, {
         headers: {
