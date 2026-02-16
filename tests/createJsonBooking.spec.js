@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
 import fs from 'fs';
 
-const bookingBaseUrl = process.env.BOOKING_API_BASE_URL;
-expect(bookingBaseUrl).toBeTruthy();
-
 test('Create New Booking With Post Call', async ({ request }) => {
+    
+    const bookingBaseUrl = process.env.BOOKING_API_BASE_URL;
+    expect(bookingBaseUrl).toBeTruthy();
 
     const booking = JSON.parse(
         fs.readFileSync('./testData/booking.json', 'utf8')
@@ -15,7 +15,7 @@ test('Create New Booking With Post Call', async ({ request }) => {
     });
 
     // Validate response
-    expect(response.ok()).toBeTruthy();
+    expect(response.status()).toBe(200);
 
     const responseJson = await response.json();
 
@@ -24,6 +24,9 @@ test('Create New Booking With Post Call', async ({ request }) => {
     expect(responseJson.bookingid).toBeGreaterThan(0);
 
     // Validate booking data
+    expect(responseJson.booking).toBeDefined();
+
+    // Validate individual fields
     expect(responseJson.booking.firstname).toBe(booking.firstname);
     expect(responseJson.booking.lastname).toBe(booking.lastname);
     expect(responseJson.booking.depositpaid).toBe(booking.depositpaid);
